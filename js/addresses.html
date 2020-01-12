@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="buidl.js"></script>
+<script type="text/javascript" src="bitcoin.js"></script>
+
+</head>
+<body>
+# of Address to Generate:<input type="number" id="iters" value="1000"><button id="addrgen">Generate</button>
+<div id="output"></div>
+<script>
+
+var btn = document.getElementById("addrgen");
+
+btn.onclick = function(){
+	console.log('btn click');
+	var iterations = document.getElementById("iters").value;
+	var outtable = '<table><tr><td>Index</td><td>Address</td><td>PrivateKey</td><td>Dispensed</td></tr>';
+	for(var i=0;i<iterations;i++){
+		var a = buidl.getNewAddress();
+		var b = a.pk;
+		var c = a.p2shp2wpkh;
+		outtable += '<Tr><td>'+i+'</td><td>'+c+'</td><td>'+b+'</td><td>1</td></tr>';
+	}
+	outtable += '</table>';
+	document.getElementById("output").innerHTML = outtable;
+	
+}
+
+
+</script>
+</body>
+</html>
