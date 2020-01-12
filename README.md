@@ -2,10 +2,10 @@
  Simple Bitcoin Shopping Cart No Node
 
 
-######################################
-# Accept Bitcoin For Free & No Node  #
-#     Open Shopping Cart             #
-######################################
+# Accept Bitcoin For Free   #
+#   No Node Required        #
+# Open Source Shopping Cart #
+
 
 I have created this shopping cart that will allow users to accept bitcoin on their website without having to use a privileged API service. 
 This project does use some public API's to check the blockchain but they require no permission or API Keys. 
