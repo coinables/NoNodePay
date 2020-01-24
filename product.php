@@ -8,7 +8,7 @@ if($_SESSION['logged'] != 1){
    header("Location: login.php");
 }
 
-$product = $_GET['item'];
+$product = mysqli_real_escape_string($conn, $_GET['item']);
 
 $queryItem = "SELECT * FROM products WHERE id = '$product'";
 $doItem = mysqli_query($conn, $queryItem) or die(mysqli_error($conn));
@@ -27,7 +27,7 @@ if(isset($_POST['update']))
   if($cost < 0.01){ $cost = 0.01; }
   $desc = mysqli_real_escape_string($conn, $_POST['description']);
   $image = mysqli_real_escape_string($conn, $_POST['image']);
-  $instock = $_POST['stock'];
+  $instock = mysqli_real_escape_string($conn, $_POST['stock']);
   $queryUpdate = "UPDATE products SET name = '$name', price = '$cost', description = '$desc', image = '$image', in_stock = '$instock' WHERE id = '$product'";
   $doUpdate = mysqli_query($conn, $queryUpdate) or die(mysqli_error($conn));
   $message = "<h3>Item Updated</h3>";
@@ -43,6 +43,14 @@ if(isset($_POST['update']))
 }
 
 
+if(isset($_POST['delete']))
+{ 
+  $queryDelete = "DELETE FROM products WHERE id = '$product'";
+  $doDelete = mysqli_query($conn, $queryDelete) or die(mysqli_error($conn));
+  //$message = "<h3>Item Removed</h3>";
+  header("Location: admin.php");
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -56,7 +64,7 @@ if(isset($_POST['update']))
 <div id="viewCart">
   <span id="viewTitle">Edit Product: <?php echo $product; ?></span><a href="admin.php">Back to Admin Panel</a><br><br>
     <b>Product Name</b><br>
-	  <form method="post">
+	  <form method="post" onsubmit="return confirm('Are you sure?');">
 	  <input type="text" class="text" name="pname" value="<?php echo $iname; ?>"><br>
 	  <b>Price USD</b><br>
 	  <input type="text" class="text" name="price" value="<?php echo $iprice; ?>"><br>
@@ -68,6 +76,7 @@ if(isset($_POST['update']))
 	  <input type="radio" name="stock" <?php if(isset($istock) && $istock == "1"){ echo "checked"; } ?> value="1">Yes
 	  <input type="radio" name="stock" <?php if(isset($istock) && $istock == "0"){ echo "checked"; } ?> value="0">No <br>
 	  <input type="submit" id="add" name="update" value="Update">
+	  <input type="submit" id="del" name="delete" value="Delete">
 	  </form>
   
   <br>

@@ -15,27 +15,34 @@ if($cartItems < 1)
    }
 
 if(isset($_POST['submit'])){
-        $_SESSION['email'] = mysqli_real_escape_string($conn, $_POST['email']);
-        $_SESSION['name'] = trim($_POST['name']);
-        $_SESSION['address'] = trim($_POST['address']);
-		$_SESSION['address2'] = trim($_POST['address2']);
-        $_SESSION['city'] = trim($_POST['city']);
-        $_SESSION['state'] = trim($_POST['state']);
-        $_SESSION['zip'] = trim($_POST['zip']);
-		$_SESSION['country'] = trim($_POST['country']);
-		$_SESSION['name'] = mysqli_real_escape_string($conn, $_SESSION['name']);
-		$_SESSION['address'] = mysqli_real_escape_string($conn, $_SESSION['address']);
-		$_SESSION['address2'] = mysqli_real_escape_string($conn, $_SESSION['address2']);
-        $_SESSION['city'] = mysqli_real_escape_string($conn, $_SESSION['city']);
-        $_SESSION['state'] = mysqli_real_escape_string($conn, $_SESSION['state']);
-        $_SESSION['zip'] = mysqli_real_escape_string($conn, $_SESSION['zip']);
-		$_SESSION['country'] = mysqli_real_escape_string($conn, $_SESSION['country']);
+        $email = mysqli_real_escape_string($conn, $_POST['email']);
+		$_SESSION['email'] = strip_tags($email);
+        $name = trimstrip($_POST['name']);
+        $address = trimstrip($_POST['address']);
+		$address2 = trimstrip($_POST['address2']);
+        $city = trimstrip($_POST['city']);
+        $state = trimstrip($_POST['state']);
+        $zip = trimstrip($_POST['zip']);
+		$country = trimstrip($_POST['country']);
+		$_SESSION['name'] = mysqli_real_escape_string($conn, $name);
+		$_SESSION['address'] = mysqli_real_escape_string($conn, $address);
+		$_SESSION['address2'] = mysqli_real_escape_string($conn, $address2);
+        $_SESSION['city'] = mysqli_real_escape_string($conn, $city);
+        $_SESSION['state'] = mysqli_real_escape_string($conn, $state);
+        $_SESSION['zip'] = mysqli_real_escape_string($conn, $zip);
+		$_SESSION['country'] = mysqli_real_escape_string($conn, $country);
 		
 		if(empty($_SESSION['email']) || empty($_SESSION['name']) || empty($_SESSION['address']) || empty($_SESSION['city']) || empty($_SESSION['zip'])){
 		$message = "<span class='errMsg'>Form is incomplete!</span>";
 		} else {
 		header('Location: confirm.php');
 		}
+}
+
+function trimstrip($inputStr){
+	 $trim = trim($inputStr);
+	 $outputStr = strip_tags($trim);
+	 return $outputStr;
 }
 
 ?>

@@ -27,6 +27,25 @@ if(isset($_POST['checkout'])){
    }
 }
 
+if(isset($_POST['remove'])){
+   	
+   if($cartItems < 1)
+   {
+   $message = "<p><span class='errMsg'>Something went wrong</span></p>";
+   }
+   else
+   {
+   $arrayplace = (int)$_POST["place"];   
+   unset($cart[$arrayplace]);
+   $cart = array_values($cart);
+   $message = "<p><span class='errMsg'>Item removed from cart.</span></p>";
+   //refresh cart
+   $_SESSION["tedi"] = $cart;
+   $cartItems = count($_SESSION['tedi']);
+   $cart = $_SESSION['tedi'];
+   }
+}
+
 
 ?>
 
@@ -54,7 +73,7 @@ if(isset($_POST['checkout'])){
 	$loopPrice = $rowLoopCart['price'];
 	$usdOwed += $loopPrice;
 	$btcOwed = $usdOwed / $_SESSION['exr'];
-	echo "<tr><td width='80%'>".$loopName."</td>";
+	echo '<tr><td width="80%">'.$loopName.'<form method="post"><input type="hidden" name="place" value="'.$i.'"><input type="submit" value="Remove" id="remove" name="remove"></form></td>';
 	echo "<td width='20%'>$".$loopPrice."</td>";
 	echo "</tr>";
 	}
@@ -69,7 +88,7 @@ if(isset($_POST['checkout'])){
 	?>
 	 </table>
 	 <br>
-	 <form method="post"><input type="submit" value="Checkout" name="checkout"> <input type="submit" value="Empty Cart" name="empty"></form>
+	 <form method="post"><input type="submit" value="Checkout" class="cartBtn" name="checkout"> <input type="submit" value="Empty Cart" name="empty" class="cartBtn"></form>
 	 <br>
   </div>
   <a href="index.php">Go Back</a>

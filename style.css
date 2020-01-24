@@ -167,7 +167,7 @@ hr{
   padding: 15px;
   font-weight: bold;
 }
-#viewTable input{
+.cartBtn{
    padding: 15px;
    background-color: #e65c00;
    color: #fff;
@@ -177,7 +177,7 @@ hr{
    font-weight: strong;
    font-size: 18px;
 }
-#viewTable input:hover{
+.cartBtn:hover{
    padding: 15px;
    background-color: #ff8534;
    color: #fff;
@@ -270,4 +270,20 @@ hr{
   color: #e65c00;
   font-weight: bold;
 }
-
+#del{
+  position: relative;
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  color: #e94c00;
+  font-weight: bold;
+}
+#remove{
+   padding: 5px;
+   background-color: #e65c00;
+   color: #fff;
+   float: left;
+   border: 1px solid #fff;
+   font-weight: strong;
+   font-size: 12px;
+}
