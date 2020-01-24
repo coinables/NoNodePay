@@ -7,6 +7,9 @@
 # Open Source Shopping Cart #
 
 # Step By Step Video Installation How To
+
+![Demo video](https://coinables.github.io/demo.gif)
+
 https://www.youtube.com/watch?v=jBUnOFxe24s
 
 I have created this shopping cart that will allow users to accept bitcoin on their website without having to use a privileged API service. 
