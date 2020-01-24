@@ -4,8 +4,9 @@ require_once('config.php');
 //session 
 session_start();
 
-if($_SESSION['logged'] != 1){
-   header("Location: login.php");
+if(!isset($_SESSION["logged"])){
+	header("Location: index.php");
+	exit();
 }
 
 $product = mysqli_real_escape_string($conn, $_GET['item']);
