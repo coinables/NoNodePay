@@ -36,7 +36,7 @@ if(isset($_POST['confirm']))
 	$complete = 0;
     $orderID = uniqid();
 	$orderData = implode(" ",$_SESSION['tedi']);
-	$orderCost = round($btcOwed, 4);
+	$orderCost = round($btcOwed, 6);
 	$_SESSION['orderCost'] = $orderCost;
 	$email = $_SESSION['email'];
 	$name = $_SESSION['name'];
@@ -153,7 +153,7 @@ EOD;
 	echo $loopName." $".$loopPrice."<br>";
 	}
 	echo "$".$usdOwed."<br>";
-	echo "&#x0E3F;".round($btcOwed, 4)."<br>";
+	echo "&#x0E3F;".round($btcOwed, 6)."<br>";
 	?>
   <a href="cart.php">EDIT</a>
   </div><br>

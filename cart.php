@@ -83,7 +83,7 @@ if(isset($_POST['remove'])){
 	echo "</tr>";
 	echo "<tr>";
 	echo "<td class='blank' width='80%'>TOTAL BTC</td>";
-	echo "<td width='20%'>&#x0E3F;".round($btcOwed, 4)."</td>";
+	echo "<td width='20%'>&#x0E3F;".round($btcOwed, 6)."</td>";
 	echo "</tr>";
 	?>
 	 </table>

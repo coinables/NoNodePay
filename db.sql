@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `zip` varchar(15) NOT NULL,
   `country` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `cost` decimal(7,4) NOT NULL,
+  `cost` decimal(7,6) NOT NULL,
   `recd` int(11) DEFAULT NULL,
   `payto` varchar(100) NOT NULL,
   `pkey` varchar(100) DEFAULT NULL,
