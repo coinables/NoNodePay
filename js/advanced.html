@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="buidl.js"></script>
+<script type="text/javascript" src="bitcoin.js"></script>
+
+</head>
+<body>
+<h1>Bulk Address Generator</h1>
+<div align="center" style="text-align: center;"><h3>Settings</h3>
+# of Addresses to Generate: <input type="number" id="iters" value="1000"><br>
+Add a Mnemonic for Easier Backup: <select id="mnemonicChoice" onChange="return checkChoice();"><option value="no">No</option><option value="yes">Yes</option></select><br> 
+<div id="hdoptions" style="display: none;">
+Select Derivation Path: <select id="derivationChoice"><option value="44">BIP44 (1)</option><option value="49">BIP49 (3)</option><option value="84">BIP84 (bc1q)</option></select><br> 
+ 
+</div>
+<br><button id="addrgen">Generate</button>
+</div>
+
+<br><br>
+<div id="output"></div>
+<script>
+
+function checkChoice(){
+	let newChoice = document.getElementById("mnemonicChoice").value;
+	if(newChoice==="yes"){
+		//show bip and hardening options
+		document.getElementById("hdoptions").style.display="block";
+	} else {
+		//hide bip and hardening options
+		document.getElementById("hdoptions").style.display="none";
+	}
+}
+
+var btn = document.getElementById("addrgen");
+
+btn.onclick = function(){
+	console.log('btn click');
+	document.getElementById("output").innerHTML = "";
+	var iterations = document.getElementById("iters").value;
+	
+	var userChoice = document.getElementById("mnemonicChoice").value;
+	
+	if(userChoice==="yes"){
+		//use HD keypool
+		
+		var createMnemonic = buidl.newMnemonic();
+		var seed = buidl.mnemonic2SeedHex(createMnemonic.words);
+		
+		var derivationPath = document.getElementById("derivationChoice").value;
+		derivationPath = Math.floor(derivationPath);
+		
+		var outtable = '<span> BIP'+derivationPath+" Mnemonic Back-up: "+createMnemonic.words+'</span><br><table><tr><td>Index</td><td>Address</td><td>Private Key</td><td>Dispensed</td></tr>';
+		for(var i=0;i<iterations;i++){
+			var a = buidl.fromHDSeed(seed.seedHex, derivationPath, 0, 0, i)
+			var b = a.addr;
+			var c = a.pk;
+			outtable += '<Tr><td>'+i+'</td><td>'+b+'</td><td>'+c+'</td><td>1</td></tr>';
+		}
+		outtable += '</table>';
+		document.getElementById("output").innerHTML = outtable;
+		
+	} else {
+		//create random keypool
+		var outtable = '<table><tr><td>Index</td><td>Address</td><td>Private Key</td><td>Dispensed</td></tr>';
+		for(var i=0;i<iterations;i++){
+			var a = buidl.getNewAddress()
+			var b = a.p2shp2wpkh;
+			var c = a.pk;
+			outtable += '<Tr><td>'+i+'</td><td>'+b+'</td><td>'+c+'</td><td>1</td></tr>';
+		}
+		outtable += '</table>';
+		document.getElementById("output").innerHTML = outtable;
+	}
+	
+	
+	
+}
+
+
+</script>
+</body>
+</html>
